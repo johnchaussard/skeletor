@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="collapse" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/collapse" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Makefile" />
+		<Unit filename="include/libcomplex.h" />
+		<Unit filename="include/libcomplex_d.h" />
+		<Unit filename="include/libcrop.h" />
+		<Unit filename="include/libeps.h" />
+		<Unit filename="include/libeps_d.h" />
+		<Unit filename="include/libgeneral.h" />
+		<Unit filename="include/libinventor.h" />
+		<Unit filename="include/libinventor_d.h" />
+		<Unit filename="include/liblist.h" />
+		<Unit filename="include/libmin_sphere.h" />
+		<Unit filename="include/libvrml.h" />
+		<Unit filename="include/libvskel.h" />
+		<Unit filename="src/com/cca2eps.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca2iv.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca2khalimsky.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca2vskel.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_and.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_bsin.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_collapse.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_collapse_minimizeintersect.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_collapse_on_surfintersect.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_compute_rvsa.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_compute_salience_map.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_compute_unidist.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_computesurfaxis.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_crop.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_curvaxis.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_curvcollapse.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_curvskel.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_curvskel_deep.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_decompose_curve.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_decompose_skeleton_into_elements.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_decompose_surface_overcollapse.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_decompose_surfaces.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_decompose_surfaces_advanced.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_decompose_volume.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_dist_to_vertex.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_filter_elements.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_filter_intersect_edges.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_filter_surface.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_filter_surfaces_collapse.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_filter_surfaces_irregular_border.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_generate_containing_cube.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_geodilat.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_keepcells.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_keepedges.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_keepfaces.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_keepnonregularedges.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_keepnonregularvertex.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_makecomplex.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_or.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_pardircollapse.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_pgm_keep_curve_extremities.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_printstats.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_skel_to_labelled_pgm.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_sub.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_surfaxis.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_surfaxis_keepsingledges.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_surfcollapse.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_surfskel.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_surfskel_deep.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/cca_vsacollapse_kf.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/compute_cube_lookup.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/copy_into.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/crop_on_disk.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/ddil.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/ddil_square.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/distance_between_maps.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/distance_dilat.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/distance_dilat_euc.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/distance_dilat_float.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/distance_dilatfactor.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/div2.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/expand_regions_count_contacts.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/generate_pgm.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/khalimsky2cca.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/long2float.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/overframe.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm2cca.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm2double.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm2iv.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm_curvskel.cxx">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/com/pgm_curvskelp.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm_draw_containing_cube.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm_enum.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm_generate_lambda_skelprio.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm_make_coarser_decomposition.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgm_surfskel.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgmdiv.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgmlabel2iv.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/pgmlabel_intersect.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/prepare_mask_foam10.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/raw2pgmP5.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/com/shrink_on_disk.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libcomplex_collapse.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libcomplex_convert.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libcomplex_data.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libcomplex_dist.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libcomplex_general.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libcomplex_surfaces.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libcrop.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libdilat.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libeps.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libgeneral.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libinventor.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/liblist.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libmin_sphere.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libvrml.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/lib/libvskel.cxx">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,184 @@
+//Librairies standardes
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+#include <mcimage.h>
+#include <mccodimage.h>
+
+#include <libcrop.h>
+
+
+#define USAGE "<input_image_file> <ouput_image_file> <raw|pgm> <shrink_factor> <for raw only: width height depth header_size num_byte_per_pixel>"
+
+#define SIDE 200
+
+int32_t main(int argc, char* argv[])
+{
+	FILE *f;
+	uint64_t rs, cs, d, factor, nrs, ncs, nd, l, m, n, avg, dt, ct, rt, i, j, k, x, y ,z, bloc, avct, h, b;
+	struct xvimage *output, *t;
+	char mode;
+
+	t=NULL;
+
+	if(argc!=5 && argc!=10)
+	{
+		fprintf(stderr, "usage: %s.\n", USAGE);
+		return(-1);
+	}
+
+	f=fopen(argv[1], "rb");
+	if(f==NULL)
+	{
+		fprintf(stderr, "Could not open file %s.\n", argv[1]);
+		return(-1);
+	}
+
+	if(strcmp(argv[3],"pgm")==0)
+		mode=1; //pgm
+	else if(strcmp(argv[3],"raw")==0)
+		mode=0; //raw
+	else
+	{
+		fprintf(stderr, "usage: %s.\n", USAGE);
+		return(-1);
+	}
+
+	if(mode==0)
+	{
+		if(argc!=10)
+		{
+			fprintf(stderr, "usage: %s.\n", USAGE);
+			return(-1);
+		}
+
+		rs=atoi(argv[5]); cs=atoi(argv[6]); d=atoi(argv[7]);
+		h=atoi(argv[8]); b=atoi(argv[9]);
+
+		if(rs<=0 || cs<=0 || d<=0 || b<=0 || h<0)
+		{
+			fprintf(stderr, "usage: %s.\n", USAGE);
+			return(-1);
+		}
+	}
+	else
+	{
+		fprintf(stdout, "pgm not yet implemented.\n");
+		return(-1);
+
+		if(read_size_on_disk(f, &rs, &cs, &d)==0)
+		{
+			fprintf(stderr, "Error in read_size_on_disk function.\n");
+			return(-1);
+		}
+	}
+
+
+	factor=atoi(argv[4]);
+	if(factor<=0)
+	{
+		fprintf(stderr, "Error: please give positive integer as shrink factor.\n");
+		return(-1);
+	}
+
+	if(rs%factor!=0 || cs%factor!=0 || d%factor!=0)
+	{
+		fprintf(stderr, "Error: sides of the original image (%lldx%lldx%lld) must be multiple of the shrink factor.\n", rs, cs, d);
+		return(-1);
+	}
+
+	if(SIDE%factor!=0)
+	{
+		fprintf(stderr, "Error: sides of the buffer zone (%d) must be multiple of the shrink factor.\n", SIDE);
+		return(-1);
+	}
+
+	nrs=rs/factor; ncs=cs/factor; nd=d/factor;
+
+	//Allocate space for ouput image
+	output=allocimage(NULL, nrs, ncs, nd, VFF_TYP_1_BYTE);
+	if(output==NULL)
+	{
+		fprintf(stderr, "Error, could not allocate output image into memory.\n");
+		return(-1);
+	}
+
+
+	avct=d/SIDE;
+	if((d%SIDE)!=0)
+		avct++;
+
+	if((rs%SIDE)==0)
+		avct*=rs/SIDE;
+	else
+		avct*=rs/SIDE +1;
+
+	if((cs%SIDE)==0)
+		avct*=cs/SIDE;
+	else
+		avct*=cs/SIDE +1;
+
+	bloc=0;
+
+	fprintf(stdout, "Processing image...     ");
+	fflush(stdout);
+
+	//Now, we finished all the input check, we are ready for the main algorithm
+	for(k=0; k<d; k=k+SIDE)
+		for(j=0; j<cs; j=j+SIDE)
+			for(i=0; i<rs; i=i+SIDE)
+			{
+				//Print info on how long still to do...
+				fprintf(stdout, "\b\b\b\b");
+				fprintf(stdout, "%3u%c", (u_int32_t)((double)bloc/avct*100.0), '%');
+				fflush(stdout);
+
+				//First, crop the zone which corner is on i,j,k and of size 100
+				if( (i>(rs-SIDE) || j>(cs-SIDE) || k>(d-SIDE)) && t!=NULL)
+				{
+					freeimage(t);
+					t=NULL;
+				}
+
+				if(crop_raw_on_disk(f, &t, i, j, k, SIDE, SIDE, SIDE, rs, cs, d, h, b, 0)==0)
+				{
+					fprintf(stderr, "Error in crop_on_disk (%lld %lld %lld).\n", i, j, k);
+					return(-1);
+				}
+
+				dt=depth(t); ct=colsize(t); rt=rowsize(t);
+				for(l=0; l<dt; l=l+factor)
+					for(m=0; m<ct; m=m+factor)
+						for(n=0; n<rt; n=n+factor)
+						{
+							avg=0;
+							for(x=0; x<factor; x++)
+								for(y=0; y<factor; y++)
+									for(z=0; z<factor; z++)
+										avg+=UCHARDATA(t)[(l+x)*rt*ct + (m+y)*rt + (n+z)];
+
+							UCHARDATA(output)[((k+l)/factor)*nrs*ncs + ((j+m)/factor)*nrs + ((i+n)/factor)]=avg/(factor*factor*factor);
+						}
+				//First, crop the zone which corner is on i,j,k and of size 100
+				if( (i>(rs-SIDE) || j>(cs-SIDE) || k>(d-SIDE)) )
+				{
+					freeimage(t);
+					t=NULL;
+				}
+
+				bloc++;
+			}
+	fprintf(stdout, "\b\b\b\bdone\n");
+	fflush(stdout);
+
+	writeimage(output, argv[2]);
+
+	return(0);
+}
+
+
+
+
+

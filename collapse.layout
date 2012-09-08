@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug" />
+	<File name="Makefile" open="1" top="0" tabpos="1">
+		<Cursor position="4500" topLine="123" />
+	</File>
+	<File name="include/libcomplex.h" open="1" top="0" tabpos="7">
+		<Cursor position="7522" topLine="116" />
+	</File>
+	<File name="include/libcomplex_d.h" open="0" top="0" tabpos="2">
+		<Cursor position="800" topLine="0" />
+	</File>
+	<File name="include/libcrop.h" open="0" top="0" tabpos="7">
+		<Cursor position="628" topLine="0" />
+	</File>
+	<File name="include/libeps.h" open="0" top="0" tabpos="0">
+		<Cursor position="61" topLine="0" />
+	</File>
+	<File name="include/libeps_d.h" open="0" top="0" tabpos="14">
+		<Cursor position="333" topLine="0" />
+	</File>
+	<File name="include/libgeneral.h" open="0" top="0" tabpos="5">
+		<Cursor position="259" topLine="0" />
+	</File>
+	<File name="include/libinventor.h" open="0" top="0" tabpos="5">
+		<Cursor position="620" topLine="0" />
+	</File>
+	<File name="include/libinventor_d.h" open="0" top="0" tabpos="2">
+		<Cursor position="382" topLine="0" />
+	</File>
+	<File name="include/liblist.h" open="0" top="0" tabpos="8">
+		<Cursor position="863" topLine="43" />
+	</File>
+	<File name="include/libmin_sphere.h" open="0" top="0" tabpos="3">
+		<Cursor position="446" topLine="0" />
+	</File>
+	<File name="include/libvrml.h" open="0" top="0" tabpos="0">
+		<Cursor position="125" topLine="0" />
+	</File>
+	<File name="include/libvskel.h" open="0" top="0" tabpos="8">
+		<Cursor position="514" topLine="0" />
+	</File>
+	<File name="src/com/cca2eps.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="1631" topLine="52" />
+	</File>
+	<File name="src/com/cca2iv.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="725" topLine="36" />
+	</File>
+	<File name="src/com/cca2khalimsky.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="1256" topLine="15" />
+	</File>
+	<File name="src/com/cca2vskel.cxx" open="0" top="0" tabpos="7">
+		<Cursor position="3573" topLine="172" />
+	</File>
+	<File name="src/com/cca_and.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="0" topLine="26" />
+	</File>
+	<File name="src/com/cca_bsin.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="1152" topLine="58" />
+	</File>
+	<File name="src/com/cca_collapse.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="2119" topLine="34" />
+	</File>
+	<File name="src/com/cca_collapse_minimizeintersect.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="500" topLine="0" />
+	</File>
+	<File name="src/com/cca_collapse_on_surfintersect.cxx" open="0" top="0" tabpos="7">
+		<Cursor position="602" topLine="22" />
+	</File>
+	<File name="src/com/cca_compute_rvsa.cxx" open="0" top="0" tabpos="8">
+		<Cursor position="971" topLine="3" />
+	</File>
+	<File name="src/com/cca_compute_salience_map.cxx" open="0" top="0" tabpos="0">
+		<Cursor position="3000" topLine="80" />
+	</File>
+	<File name="src/com/cca_compute_unidist.cxx" open="0" top="0" tabpos="0">
+		<Cursor position="538" topLine="6" />
+	</File>
+	<File name="src/com/cca_computesurfaxis.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="584" topLine="6" />
+	</File>
+	<File name="src/com/cca_crop.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="302" topLine="0" />
+	</File>
+	<File name="src/com/cca_curvaxis.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="5108" topLine="146" />
+	</File>
+	<File name="src/com/cca_curvcollapse.cxx" open="0" top="0" tabpos="8">
+		<Cursor position="548" topLine="0" />
+	</File>
+	<File name="src/com/cca_curvskel.cxx" open="1" top="1" tabpos="3">
+		<Cursor position="8176" topLine="377" />
+	</File>
+	<File name="src/com/cca_decompose_curve.cxx" open="0" top="0" tabpos="8">
+		<Cursor position="5199" topLine="181" />
+	</File>
+	<File name="src/com/cca_decompose_skeleton_into_elements.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="4399" topLine="151" />
+	</File>
+	<File name="src/com/cca_decompose_surface_overcollapse.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="3075" topLine="110" />
+	</File>
+	<File name="src/com/cca_decompose_surfaces.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="8838" topLine="343" />
+	</File>
+	<File name="src/com/cca_decompose_surfaces_advanced.cxx" open="0" top="0" tabpos="10">
+		<Cursor position="8852" topLine="336" />
+	</File>
+	<File name="src/com/cca_decompose_volume.cxx" open="0" top="0" tabpos="10">
+		<Cursor position="4575" topLine="147" />
+	</File>
+	<File name="src/com/cca_dist_to_vertex.cxx" open="1" top="0" tabpos="2">
+		<Cursor position="1420" topLine="49" />
+	</File>
+	<File name="src/com/cca_filter_elements.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="1281" topLine="30" />
+	</File>
+	<File name="src/com/cca_filter_intersect_edges.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="485" topLine="10" />
+	</File>
+	<File name="src/com/cca_filter_surface.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="5325" topLine="167" />
+	</File>
+	<File name="src/com/cca_filter_surfaces_collapse.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="2581" topLine="91" />
+	</File>
+	<File name="src/com/cca_filter_surfaces_irregular_border.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="5733" topLine="172" />
+	</File>
+	<File name="src/com/cca_generate_containing_cube.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="443" topLine="0" />
+	</File>
+	<File name="src/com/cca_geodilat.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="450" topLine="1" />
+	</File>
+	<File name="src/com/cca_keepcells.cxx" open="0" top="0" tabpos="0">
+		<Cursor position="647" topLine="23" />
+	</File>
+	<File name="src/com/cca_keepedges.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="500" topLine="0" />
+	</File>
+	<File name="src/com/cca_keepfaces.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="0" topLine="8" />
+	</File>
+	<File name="src/com/cca_keepnonregularedges.cxx" open="0" top="0" tabpos="1">
+		<Cursor position="1634" topLine="43" />
+	</File>
+	<File name="src/com/cca_makecomplex.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="593" topLine="39" />
+	</File>
+	<File name="src/com/cca_or.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="1403" topLine="24" />
+	</File>
+	<File name="src/com/cca_pardircollapse.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="2458" topLine="113" />
+	</File>
+	<File name="src/com/cca_pgm_keep_curve_extremities.cxx" open="0" top="0" tabpos="7">
+		<Cursor position="1969" topLine="78" />
+	</File>
+	<File name="src/com/cca_printstats.cxx" open="0" top="0" tabpos="9">
+		<Cursor position="1331" topLine="19" />
+	</File>
+	<File name="src/com/cca_skel_to_labelled_pgm.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="3665" topLine="108" />
+	</File>
+	<File name="src/com/cca_sub.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="1360" topLine="0" />
+	</File>
+	<File name="src/com/cca_surfaxis.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="5124" topLine="178" />
+	</File>
+	<File name="src/com/cca_surfaxis_keepsingledges.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="0" topLine="110" />
+	</File>
+	<File name="src/com/cca_surfcollapse.cxx" open="0" top="0" tabpos="1">
+		<Cursor position="509" topLine="0" />
+	</File>
+	<File name="src/com/cca_surfskel.cxx" open="0" top="0" tabpos="7">
+		<Cursor position="7713" topLine="58" />
+	</File>
+	<File name="src/com/cca_vsacollapse_kf.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="1216" topLine="10" />
+	</File>
+	<File name="src/com/compute_cube_lookup.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="6306" topLine="154" />
+	</File>
+	<File name="src/com/copy_into.cxx" open="0" top="0" tabpos="0">
+		<Cursor position="1021" topLine="3" />
+	</File>
+	<File name="src/com/ddil.cxx" open="0" top="0" tabpos="11">
+		<Cursor position="8942" topLine="660" />
+	</File>
+	<File name="src/com/ddil_square.cxx" open="0" top="0" tabpos="0">
+		<Cursor position="16074" topLine="537" />
+	</File>
+	<File name="src/com/distance_between_maps.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="3025" topLine="96" />
+	</File>
+	<File name="src/com/distance_dilat.cxx" open="0" top="0" tabpos="12">
+		<Cursor position="855" topLine="21" />
+	</File>
+	<File name="src/com/distance_dilat_euc.cxx" open="0" top="0" tabpos="17">
+		<Cursor position="1411" topLine="30" />
+	</File>
+	<File name="src/com/distance_dilat_float.cxx" open="0" top="0" tabpos="11">
+		<Cursor position="830" topLine="16" />
+	</File>
+	<File name="src/com/distance_dilatfactor.cxx" open="0" top="0" tabpos="12">
+		<Cursor position="432" topLine="39" />
+	</File>
+	<File name="src/com/div2.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="810" topLine="7" />
+	</File>
+	<File name="src/com/expand_regions_count_contacts.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="290" topLine="0" />
+	</File>
+	<File name="src/com/generate_pgm.cxx" open="0" top="0" tabpos="1">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="src/com/khalimsky2cca.cxx" open="0" top="0" tabpos="8">
+		<Cursor position="906" topLine="10" />
+	</File>
+	<File name="src/com/pgm2cca.cxx" open="1" top="0" tabpos="6">
+		<Cursor position="1085" topLine="26" />
+	</File>
+	<File name="src/com/pgm2iv.cxx" open="0" top="0" tabpos="10">
+		<Cursor position="4278" topLine="109" />
+	</File>
+	<File name="src/com/pgm_curvskel.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="18900" topLine="733" />
+	</File>
+	<File name="src/com/pgm_curvskelp.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="12656" topLine="486" />
+	</File>
+	<File name="src/com/pgm_draw_containing_cube.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="824" topLine="15" />
+	</File>
+	<File name="src/com/pgm_enum.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="228" topLine="0" />
+	</File>
+	<File name="src/com/pgm_generate_lambda_skelprio.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="476" topLine="9" />
+	</File>
+	<File name="src/com/pgm_make_coarser_decomposition.cxx" open="0" top="0" tabpos="9">
+		<Cursor position="1378" topLine="61" />
+	</File>
+	<File name="src/com/pgm_surfskel.cxx" open="0" top="0" tabpos="1">
+		<Cursor position="14014" topLine="536" />
+	</File>
+	<File name="src/com/pgmlabel2iv.cxx" open="0" top="0" tabpos="11">
+		<Cursor position="5116" topLine="195" />
+	</File>
+	<File name="src/com/prepare_mask_foam10.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="519" topLine="0" />
+	</File>
+	<File name="src/com/raw2pgmP5.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="906" topLine="28" />
+	</File>
+	<File name="src/com/shrink_on_disk.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="7165" topLine="251" />
+	</File>
+	<File name="src/lib/libcomplex_collapse.cxx" open="1" top="0" tabpos="4">
+		<Cursor position="67381" topLine="1995" />
+	</File>
+	<File name="src/lib/libcomplex_convert.cxx" open="0" top="0" tabpos="7">
+		<Cursor position="842" topLine="24" />
+	</File>
+	<File name="src/lib/libcomplex_data.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="5152" topLine="187" />
+	</File>
+	<File name="src/lib/libcomplex_dist.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="9353" topLine="460" />
+	</File>
+	<File name="src/lib/libcomplex_general.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="2953" topLine="185" />
+	</File>
+	<File name="src/lib/libcomplex_surfaces.cxx" open="0" top="0" tabpos="2">
+		<Cursor position="47162" topLine="1371" />
+	</File>
+	<File name="src/lib/libcrop.cxx" open="0" top="0" tabpos="3">
+		<Cursor position="1877" topLine="48" />
+	</File>
+	<File name="src/lib/libdilat.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="3097" topLine="160" />
+	</File>
+	<File name="src/lib/libeps.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="1059" topLine="21" />
+	</File>
+	<File name="src/lib/libgeneral.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="1954" topLine="41" />
+	</File>
+	<File name="src/lib/libinventor.cxx" open="0" top="0" tabpos="10">
+		<Cursor position="4624" topLine="119" />
+	</File>
+	<File name="src/lib/liblist.cxx" open="1" top="0" tabpos="5">
+		<Cursor position="2068" topLine="94" />
+	</File>
+	<File name="src/lib/libmin_sphere.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="3541" topLine="54" />
+	</File>
+	<File name="src/lib/libvrml.cxx" open="0" top="0" tabpos="9">
+		<Cursor position="347" topLine="0" />
+	</File>
+	<File name="src/lib/libvskel.cxx" open="0" top="0" tabpos="9">
+		<Cursor position="2594" topLine="70" />
+	</File>
+</CodeBlocks_layout_file>
