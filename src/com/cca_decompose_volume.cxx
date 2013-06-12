@@ -22,10 +22,12 @@
 
 int32_t main(int argc, char *argv[])
 {
-	struct xvimage *cca_skel_main_faces, *cca_skel, *output_pgm_label, *pgm_volume, *geodilat;
-	list *decomposition, *only_surfaces, *only_curves;
+	struct xvimage *cca_skel_main_faces, *cca_skel, *output_pgm_label, *pgm_volume, *geodilat, *pgm_latemap;
+	list *decomposition, *only_surfaces, *only_curves, *list_current_pixels, *list_next_pixels, *tlist;
 	complexe *point, *t;
-	uint32_t i, rs_pgm, cs_pgm, d_pgm, rs_cca, cs_cca, d_cca, N_pgm, N_cca, ps_cca, ps_pgm, label, pix_cca, pix_pgm, x, y, z, nbpix;
+	uint32_t i, rs_pgm, cs_pgm, d_pgm, rs_cca, cs_cca, d_cca, N_pgm, N_cca, ps_cca, ps_pgm, label, pix_cca, pix_pgm, x, y, z, nbpix, todilate, current_pixel, voisin;
+	uint32_t *tab_pix;
+	int32_t signed_count;
 
 
 	//uint32_t turn=0;
@@ -122,7 +124,7 @@ int32_t main(int argc, char *argv[])
 			}
 		}
 
-		complexe_geodilat_inside_cca(only_surfaces, geodilat);
+		//complexe_geodilat_inside_cca(only_surfaces, geodilat);
 
 		list_append_to_other_list(only_surfaces, decomposition);
 		list_append_to_other_list(only_curves, decomposition);
@@ -391,7 +393,7 @@ int32_t main(int argc, char *argv[])
 	freeimage(cca_skel_main_faces);
 
 
-/*	if(strcmp(argv[4], "NULL")!=0)
+	if(strcmp(argv[4], "NULL")!=0)
 	{
 		pgm_latemap=readimage(argv[4]);
 		if(pgm_latemap==NULL)
@@ -424,22 +426,22 @@ int32_t main(int argc, char *argv[])
 
 		qsort(tab_pix, nbpix, 2*sizeof(uint32_t), qsort_function_on_uint32);
 
-	}*/
-
-	for(i=0; i<N_pgm; i++)
-	{
-		if(ULONGDATA(output_pgm_label)[i]==1) ULONGDATA(output_pgm_label)[i]=0;
 	}
 
-	writeimage(output_pgm_label, argv[4]);
+	/*for(i=0; i<N_pgm; i++)
+	{
+		if(ULONGDATA(output_pgm_label)[i]==1) ULONGDATA(output_pgm_label)[i]=0;
+	}*/
+
+	/*writeimage(output_pgm_label, argv[4]);
 	freeimage(output_pgm_label);
 
-	return(0);
-/*	writeimage(output_pgm_label, "debug.pgm");
+	return(0);*/
+	//writeimage(output_pgm_label, "debug.pgm");
 
 
-	list_current_pixels=list_newlist(MODE_FIFO);
-	list_next_pixels=list_newlist(MODE_FIFO);
+	list_current_pixels=list_newlist(MODE_FIFO,1000);
+	list_next_pixels=list_newlist(MODE_FIFO,1000);
 	if(list_current_pixels==NULL || list_next_pixels==NULL)
 	{
 		fprintf(stderr, "Error: Error when creating list.\n");
@@ -452,7 +454,7 @@ int32_t main(int argc, char *argv[])
 		todilate=tab_pix[2*(signed_count-1)];
 		while(signed_count>=0 && tab_pix[2*signed_count]>=(uint32_t)todilate)
 		{
-			list_push(list_next_pixels, (void*)tab_pix[2*signed_count+1]);
+			list_push_uint32_t(list_next_pixels, tab_pix[2*signed_count+1]);
 			signed_count=signed_count-1;
 		}
 	}
@@ -463,7 +465,7 @@ int32_t main(int argc, char *argv[])
 		for(i=0; i<N_pgm; i++)
 			if(ULONGDATA(output_pgm_label)[i]>1)
 			{
-				list_push(list_next_pixels, (void*)i);
+				list_push_uint32_t(list_next_pixels, i);
 			}
 	}
 
@@ -473,16 +475,18 @@ int32_t main(int argc, char *argv[])
 		list_next_pixels=list_current_pixels;
 		list_current_pixels=tlist;
 
+		fprintf(stdout, "Go\n");
+
 		while(!list_isempty(list_current_pixels))
 		{
-			current_pixel = (uint32_t)list_pop(list_current_pixels);
+			current_pixel = list_pop_uint32_t(list_current_pixels);
 			for(i=0; i<6; i++)
 			{
 				voisin=voisin6(current_pixel, 2*i, rs_pgm, ps_pgm, N_pgm);
 				if(voisin!=-1 && ULONGDATA(output_pgm_label)[voisin]==1)
 				{
 					ULONGDATA(output_pgm_label)[voisin]=ULONGDATA(output_pgm_label)[current_pixel];
-					list_push(list_next_pixels, (void*)voisin);
+					list_push_uint32_t(list_next_pixels, voisin);
 				}
 			}
 		}
@@ -493,24 +497,14 @@ int32_t main(int argc, char *argv[])
 		{
 			while(signed_count>=0 && tab_pix[2*signed_count]>=(uint32_t)todilate)
 			{
-				list_push(list_next_pixels, (void*)tab_pix[2*signed_count+1]);
+				list_push_uint32_t(list_next_pixels, tab_pix[2*signed_count+1]);
 				signed_count=signed_count-1;
 			}
 		}
 
-		turn++;
 
-		if(turn==17)
-		{
-			for(i=0; i<N_pgm; i++)
-			{
-				if(ULONGDATA(output_pgm_label)[i]==1) ULONGDATA(output_pgm_label)[i]=0;
-			}
 
-			writeimage(output_pgm_label, "debug.pgm");
-			return(0);
 
-		}
 	}
 
 	list_delete(list_next_pixels, NO_FREE_DATA);
@@ -522,12 +516,12 @@ int32_t main(int argc, char *argv[])
 	}
 
 
-	writeimage(output_pgm_label, argv[5]);
+	writeimage(output_pgm_label, argv[4]);
 
 	freeimage(output_pgm_label);
 
 
 
-	return(0);*/
+	return(0);
 }
 

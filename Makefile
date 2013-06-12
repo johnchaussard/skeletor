@@ -1,5 +1,5 @@
 
-LIB_PINK=/home/mockba/Progs/pink_lib/
+LIB_PINK=./libpink
 
 #Quelques librairies externes
 INCLUDE_PINK=$(PINK)/include/
@@ -131,7 +131,8 @@ $(OBJ_PERSO_DIR)libcomplex_convert.o\
 $(OBJ_PERSO_DIR)libcomplex_data.o\
 $(OBJ_PERSO_DIR)libcomplex_general.o\
 $(OBJ_PERSO_DIR)libcomplex_dist.o\
-$(OBJ_PERSO_DIR)libcomplex_surfaces.o
+$(OBJ_PERSO_DIR)libcomplex_surfaces.o\
+
 
 
 
@@ -139,9 +140,9 @@ $(OBJ_PERSO_DIR)libcomplex_surfaces.o
 CC=g++
 LC1=ar
 LC2=ranlib
-CCFLAGS=-O3 -c -I $(INC_PERSO_DIR) -I $(INCLUDE_PINK)
-LDFLAGS=-O3 -I $(INC_PERSO_DIR) -I $(INCLUDE_PINK)
-ADDLIBS=$(OBJ_FILES) $(PINK)/linux/obj/ltangents.o $(PINK)/linux/obj/mccodimage.o -L$(LIB_PERSO_DIR) -L$(LIB_PINK) -lpink -lcomplex -lm
+CCFLAGS=-g -c -I $(INC_PERSO_DIR) -I $(INCLUDE_PINK)
+LDFLAGS=-g -I $(INC_PERSO_DIR) -I $(INCLUDE_PINK)
+ADDLIBS=$(OBJ_FILES) -L$(LIB_PERSO_DIR) -L$(LIB_PINK) -lcomplex -lpink -lm
 
 
 
