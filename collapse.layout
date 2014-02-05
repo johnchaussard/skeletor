@@ -4,7 +4,7 @@
 	<File name="Makefile" open="1" top="0" tabpos="1">
 		<Cursor position="4500" topLine="123" />
 	</File>
-	<File name="include/libcomplex.h" open="1" top="0" tabpos="7">
+	<File name="include/libcomplex.h" open="1" top="0" tabpos="2">
 		<Cursor position="7522" topLine="116" />
 	</File>
 	<File name="include/libcomplex_d.h" open="0" top="0" tabpos="2">
@@ -28,8 +28,8 @@
 	<File name="include/libinventor_d.h" open="0" top="0" tabpos="2">
 		<Cursor position="382" topLine="0" />
 	</File>
-	<File name="include/liblist.h" open="0" top="0" tabpos="8">
-		<Cursor position="863" topLine="43" />
+	<File name="include/liblist.h" open="1" top="0" tabpos="4">
+		<Cursor position="1898" topLine="35" />
 	</File>
 	<File name="include/libmin_sphere.h" open="0" top="0" tabpos="3">
 		<Cursor position="446" topLine="0" />
@@ -88,8 +88,8 @@
 	<File name="src/com/cca_curvcollapse.cxx" open="0" top="0" tabpos="8">
 		<Cursor position="548" topLine="0" />
 	</File>
-	<File name="src/com/cca_curvskel.cxx" open="1" top="1" tabpos="3">
-		<Cursor position="8176" topLine="377" />
+	<File name="src/com/cca_curvskel.cxx" open="1" top="0" tabpos="7">
+		<Cursor position="8176" topLine="227" />
 	</File>
 	<File name="src/com/cca_decompose_curve.cxx" open="0" top="0" tabpos="8">
 		<Cursor position="5199" topLine="181" />
@@ -106,10 +106,10 @@
 	<File name="src/com/cca_decompose_surfaces_advanced.cxx" open="0" top="0" tabpos="10">
 		<Cursor position="8852" topLine="336" />
 	</File>
-	<File name="src/com/cca_decompose_volume.cxx" open="0" top="0" tabpos="10">
-		<Cursor position="4575" topLine="147" />
+	<File name="src/com/cca_decompose_volume.cxx" open="1" top="0" tabpos="3">
+		<Cursor position="11504" topLine="451" />
 	</File>
-	<File name="src/com/cca_dist_to_vertex.cxx" open="1" top="0" tabpos="2">
+	<File name="src/com/cca_dist_to_vertex.cxx" open="0" top="0" tabpos="2">
 		<Cursor position="1420" topLine="49" />
 	</File>
 	<File name="src/com/cca_filter_elements.cxx" open="0" top="0" tabpos="3">
@@ -161,7 +161,7 @@
 		<Cursor position="1331" topLine="19" />
 	</File>
 	<File name="src/com/cca_skel_to_labelled_pgm.cxx" open="0" top="0" tabpos="4">
-		<Cursor position="3665" topLine="108" />
+		<Cursor position="8494" topLine="278" />
 	</File>
 	<File name="src/com/cca_sub.cxx" open="0" top="0" tabpos="4">
 		<Cursor position="1360" topLine="0" />
@@ -175,8 +175,8 @@
 	<File name="src/com/cca_surfcollapse.cxx" open="0" top="0" tabpos="1">
 		<Cursor position="509" topLine="0" />
 	</File>
-	<File name="src/com/cca_surfskel.cxx" open="0" top="0" tabpos="7">
-		<Cursor position="7713" topLine="58" />
+	<File name="src/com/cca_surfskel.cxx" open="1" top="1" tabpos="6">
+		<Cursor position="7713" topLine="214" />
 	</File>
 	<File name="src/com/cca_vsacollapse_kf.cxx" open="0" top="0" tabpos="2">
 		<Cursor position="1216" topLine="10" />
@@ -212,7 +212,7 @@
 		<Cursor position="810" topLine="7" />
 	</File>
 	<File name="src/com/expand_regions_count_contacts.cxx" open="0" top="0" tabpos="2">
-		<Cursor position="290" topLine="0" />
+		<Cursor position="290" topLine="77" />
 	</File>
 	<File name="src/com/generate_pgm.cxx" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
@@ -220,8 +220,8 @@
 	<File name="src/com/khalimsky2cca.cxx" open="0" top="0" tabpos="8">
 		<Cursor position="906" topLine="10" />
 	</File>
-	<File name="src/com/pgm2cca.cxx" open="1" top="0" tabpos="6">
-		<Cursor position="1085" topLine="23" />
+	<File name="src/com/pgm2cca.cxx" open="0" top="0" tabpos="6">
+		<Cursor position="1085" topLine="9" />
 	</File>
 	<File name="src/com/pgm2iv.cxx" open="0" top="0" tabpos="10">
 		<Cursor position="4278" topLine="109" />
@@ -242,7 +242,7 @@
 		<Cursor position="476" topLine="9" />
 	</File>
 	<File name="src/com/pgm_make_coarser_decomposition.cxx" open="0" top="0" tabpos="9">
-		<Cursor position="1378" topLine="61" />
+		<Cursor position="1378" topLine="0" />
 	</File>
 	<File name="src/com/pgm_surfskel.cxx" open="0" top="0" tabpos="1">
 		<Cursor position="14014" topLine="536" />
@@ -259,8 +259,8 @@
 	<File name="src/com/shrink_on_disk.cxx" open="0" top="0" tabpos="6">
 		<Cursor position="7165" topLine="251" />
 	</File>
-	<File name="src/lib/libcomplex_collapse.cxx" open="1" top="0" tabpos="4">
-		<Cursor position="67381" topLine="1995" />
+	<File name="src/lib/libcomplex_collapse.cxx" open="0" top="0" tabpos="4">
+		<Cursor position="67381" topLine="1812" />
 	</File>
 	<File name="src/lib/libcomplex_convert.cxx" open="0" top="0" tabpos="7">
 		<Cursor position="842" topLine="24" />
@@ -274,8 +274,8 @@
 	<File name="src/lib/libcomplex_general.cxx" open="0" top="0" tabpos="3">
 		<Cursor position="2953" topLine="185" />
 	</File>
-	<File name="src/lib/libcomplex_surfaces.cxx" open="0" top="0" tabpos="2">
-		<Cursor position="47162" topLine="1371" />
+	<File name="src/lib/libcomplex_surfaces.cxx" open="1" top="0" tabpos="5">
+		<Cursor position="50225" topLine="1450" />
 	</File>
 	<File name="src/lib/libcrop.cxx" open="0" top="0" tabpos="3">
 		<Cursor position="1877" topLine="48" />
@@ -292,8 +292,8 @@
 	<File name="src/lib/libinventor.cxx" open="0" top="0" tabpos="10">
 		<Cursor position="4624" topLine="119" />
 	</File>
-	<File name="src/lib/liblist.cxx" open="1" top="0" tabpos="5">
-		<Cursor position="2068" topLine="94" />
+	<File name="src/lib/liblist.cxx" open="0" top="0" tabpos="5">
+		<Cursor position="2068" topLine="0" />
 	</File>
 	<File name="src/lib/libmin_sphere.cxx" open="0" top="0" tabpos="6">
 		<Cursor position="3541" topLine="54" />

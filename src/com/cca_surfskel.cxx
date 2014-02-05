@@ -99,7 +99,7 @@ int32_t distance_dilat(struct xvimage *distmap_in)
 
 	if(max%2 == 1)
 	{
-		memcpy(distmap_in->image_data, t1->image_data, N*sizeof(unsigned long));
+		memcpy(distmap_in->image_data, t1->image_data, N*sizeof(ULONGDATA(t1)[0]));
 		freeimage(t1);
 	}
 	else
@@ -134,6 +134,8 @@ int32_t main(int argc, char *argv[])
 
 	//We read input image
 	image=readimage(argv[1]);
+
+
 	if (image==NULL)
 	{
 		fprintf(stderr, "Error: Could not read %s.\n", argv[1]);
