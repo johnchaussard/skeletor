@@ -19,7 +19,7 @@
 #include <libcomplex.h>
 
 
-#define USAGE "<input_pgm> <output_pgm>"
+#define USAGE "<input_pgm> <inhib_pgm|NULL> <output_pgm>"
 
 
 uint32_t cca_count_edge_in_cube(struct xvimage *cca_image, uint32_t pixnumber, uint32_t rs, uint32_t ps)
@@ -58,8 +58,8 @@ uint32_t pgm_count_direct_neighbours(struct xvimage *pgm_image, uint32_t pixnumb
 	if( (y>0) && (UCHARDATA(pgm_image)[pixnumber-rs]!=0)) r++;
 	if( (y<(uint32_t)colsize(pgm_image)) && (UCHARDATA(pgm_image)[pixnumber+rs]!=0)) r++;
 
-	if( (z>0) && (UCHARDATA(pgm_image)[pixnumber-ps]!=0)) r++;
-	if( (z<(uint32_t)depth(pgm_image)) && (UCHARDATA(pgm_image)[pixnumber+ps]!=0)) r++;
+	if( (z>0) && (pixnumber>=ps) && (UCHARDATA(pgm_image)[pixnumber-ps]!=0)) r++;
+	if( (z<(uint32_t)depth(pgm_image)) && (depth(pgm_image)>1) && (UCHARDATA(pgm_image)[pixnumber+ps]!=0)) r++;
 
 	return r;
 }
@@ -125,7 +125,7 @@ uint32_t cca_highest_value(struct xvimage *cca_image, struct xvimage *distmap, u
 		break;
 
 		default:
-			fprintf(stderr, "cca_getfacedist(): Wrong face type given.\n");
+			fprintf(stderr, "cca_highest_value(): Wrong face type given.\n");
 	}
 
 	ccpix=i+j*rs+k*ps;
@@ -167,57 +167,63 @@ uint32_t cca_highest_value(struct xvimage *cca_image, struct xvimage *distmap, u
 			}
 
 
-			cctest=ccpix-ps;
-			test=pix-newps;
-			test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
-			testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
-			if((bord & Z_BORDER_MIN) == 0)
+			if (ccpix >= ps) //En 2d, ceci devrait éviter un probleme...
 			{
-				if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
+				cctest=ccpix-ps;
+				test=pix-newps;
+				test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
+				testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
+				if((bord & Z_BORDER_MIN) == 0)
 				{
-					max=test;
-					ccmax=cctest;
-					max_count=test_count;
-					maxneigh=testneigh;
-				}
-				else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
-				{
-					if(	(test_count > max_count) ||
-						( (test_count == max_count) && (testneigh > maxneigh) ) ||
-						( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+					if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
 					{
 						max=test;
 						ccmax=cctest;
 						max_count=test_count;
 						maxneigh=testneigh;
 					}
+					else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
+					{
+						if(	(test_count > max_count) ||
+							( (test_count == max_count) && (testneigh > maxneigh) ) ||
+							( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+						{
+							max=test;
+							ccmax=cctest;
+							max_count=test_count;
+							maxneigh=testneigh;
+						}
+					}
 				}
 			}
 
 
-			cctest=ccpix-ps-rs;
-			test=pix-newps-newrs;
-			test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
-			testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
-			if( ((bord & Z_BORDER_MIN) == 0) && ((bord & Y_BORDER_MIN) == 0) )
+			if (ccpix >= ps + rs)
 			{
-				if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
+				cctest=ccpix-ps-rs;
+				test=pix-newps-newrs;
+				test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
+				testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
+				if( ((bord & Z_BORDER_MIN) == 0) && ((bord & Y_BORDER_MIN) == 0) )
 				{
-					max=test;
-					ccmax=cctest;
-					max_count=test_count;
-					maxneigh=testneigh;
-				}
-				else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
-				{
-					if(	(test_count > max_count) ||
-						( (test_count == max_count) && (testneigh > maxneigh) ) ||
-						( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+					if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
 					{
 						max=test;
 						ccmax=cctest;
 						max_count=test_count;
 						maxneigh=testneigh;
+					}
+					else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
+					{
+						if(	(test_count > max_count) ||
+							( (test_count == max_count) && (testneigh > maxneigh) ) ||
+							( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+						{
+							max=test;
+							ccmax=cctest;
+							max_count=test_count;
+							maxneigh=testneigh;
+						}
 					}
 				}
 			}
@@ -265,57 +271,63 @@ uint32_t cca_highest_value(struct xvimage *cca_image, struct xvimage *distmap, u
 			}
 
 
-			cctest=ccpix-ps;
-			test=pix-newps;
-			test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
-			testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
-			if((bord & Z_BORDER_MIN) == 0)
+			if (ccpix >= ps) //En 2d, ceci devrait éviter un probleme...
 			{
-				if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
+				cctest=ccpix-ps;
+				test=pix-newps;
+				test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
+				testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
+				if((bord & Z_BORDER_MIN) == 0)
 				{
-					max=test;
-					ccmax=cctest;
-					max_count=test_count;
-					maxneigh=testneigh;
-				}
-				else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
-				{
-					if(	(test_count > max_count) ||
-						( (test_count == max_count) && (testneigh > maxneigh) ) ||
-						( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+					if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
 					{
 						max=test;
 						ccmax=cctest;
 						max_count=test_count;
 						maxneigh=testneigh;
 					}
+					else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
+					{
+						if(	(test_count > max_count) ||
+							( (test_count == max_count) && (testneigh > maxneigh) ) ||
+							( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+						{
+							max=test;
+							ccmax=cctest;
+							max_count=test_count;
+							maxneigh=testneigh;
+						}
+					}
 				}
 			}
 
 
-			cctest=ccpix-ps-1;
-			test=pix-newps-1;
-			test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
-			testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
-			if( ((bord & Z_BORDER_MIN) == 0) && ((bord & X_BORDER_MIN) == 0) )
+			if (ccpix >= ps +1) //En 2d, ceci devrait éviter un probleme...
 			{
-				if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
+				cctest=ccpix-ps-1;
+				test=pix-newps-1;
+				test_count=cca_count_edge_in_cube(cca_image, cctest, rs, ps);
+				testneigh=pgm_count_direct_neighbours(output, test, newrs, newps);
+				if( ((bord & Z_BORDER_MIN) == 0) && ((bord & X_BORDER_MIN) == 0) )
 				{
-					max=test;
-					ccmax=cctest;
-					max_count=test_count;
-					maxneigh=testneigh;
-				}
-				else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
-				{
-					if(	(test_count > max_count) ||
-						( (test_count == max_count) && (testneigh > maxneigh) ) ||
-						( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+					if(ULONGDATA(distmap)[max]==0 && ULONGDATA(distmap)[test]>0)
 					{
 						max=test;
 						ccmax=cctest;
 						max_count=test_count;
 						maxneigh=testneigh;
+					}
+					else if(ULONGDATA(distmap)[max]>0 && ULONGDATA(distmap)[test]>0)
+					{
+						if(	(test_count > max_count) ||
+							( (test_count == max_count) && (testneigh > maxneigh) ) ||
+							( (test_count == max_count) && (testneigh == maxneigh) && (ULONGDATA(distmap)[max] < ULONGDATA(distmap)[test])) )
+						{
+							max=test;
+							ccmax=cctest;
+							max_count=test_count;
+							maxneigh=testneigh;
+						}
 					}
 				}
 			}
@@ -470,7 +482,7 @@ uint32_t cca_highest_value(struct xvimage *cca_image, struct xvimage *distmap, u
 
 
 		default:
-			fprintf(stderr, "cca_getfacedist(): Wrong face type given.\n");
+			fprintf(stderr, "cca_highest_value(): Wrong face type given (2).\n");
 	}
 
 	return(0);
@@ -554,7 +566,7 @@ int32_t distance_dilat(struct xvimage *distmap_in)
 
 	if(max%2 == 1)
 	{
-		memcpy(distmap_in->image_data, t1->image_data, N*sizeof(unsigned long));
+		memcpy(distmap_in->image_data, t1->image_data, N*4);
 		freeimage(t1);
 	}
 	else
@@ -574,7 +586,7 @@ int32_t main(int argc, char *argv[])
 	//*******************************************
 	//Checking input values
 	//*******************************************
-	if (argc!=3)
+	if (argc!=4)
 	{
 		fprintf(stderr, "usage: %s %s\n", argv[0], USAGE);
 		return(-1);
@@ -682,7 +694,7 @@ int32_t main(int argc, char *argv[])
 		}
 
 		for(i=0; i<N; i++)
-			ULONGDATA(filtermap)[i]=(2*ULONGDATA(filtermap)[i]-ULONGDATA(distmap)[i]);
+			ULONGDATA(filtermap)[i]=(ULONGDATA(filtermap)[i]-ULONGDATA(distmap)[i]);
 
 		freeimage(distmap);
 	}
@@ -724,13 +736,30 @@ int32_t main(int argc, char *argv[])
 	}
 
 
-	inhib=allocimage(NULL, rowsize(image), colsize(image), depth(image), VFF_TYP_1_BYTE);
-	if(inhib==NULL)
+	if (strcmp(argv[2], "NULL")==0)
 	{
-		fprintf(stderr, "Error: memory allocation failed for inhibit image.\n");
-		freeimage(filtermap);
-		freeimage(image);
-		return(-1);
+		inhib=allocimage(NULL, rowsize(image), colsize(image), depth(image), VFF_TYP_1_BYTE);
+		if(inhib==NULL)
+		{
+			fprintf(stderr, "Error: memory allocation failed for inhibit image.\n");
+			freeimage(filtermap);
+			freeimage(image);
+			return(-1);
+		}
+	}
+	else
+	{
+		inhib=readimage(argv[2]);
+		if(inhib==NULL)
+		{
+			fprintf(stderr, "Error: could not open image %s.\n", argv[2]);
+			freeimage(filtermap);
+			freeimage(image);
+			return(-1);
+		}
+		pgm_to_cca(inhib);
+		writeimage(inhib, "inhib.cca");
+
 	}
 
 	//*******************************************************
@@ -816,6 +845,8 @@ int32_t main(int argc, char *argv[])
 
 	cca_keep_only_cells(image);
 
+	writeimage(image, "temp.cca");
+
 	/*maxvalue = pgm_cpt-1;
 
 	fprintf(stdout, "hey %d\n", maxvalue);
@@ -871,6 +902,14 @@ int32_t main(int argc, char *argv[])
 		for(j=0; j<cs; j++)
 			for(i=0; i<rs; i++)
 			{
+				if((UCHARDATA(image)[pix]&CC_FXY)!=0)  //En 2d, il peut rester des volumes à cause de l'inhibiteur
+				{
+					v=cca_highest_value(image, pgm_map, i, j, k, CC_FXY, rs, ps, output);
+					UCHARDATA(output)[v]=255;
+				}
+
+
+
 				if((UCHARDATA(image)[pix]&CC_AX)!=0)
 				{
 					v=cca_highest_value(image, pgm_map, i, j, k, CC_AX, rs, ps, output);
@@ -889,10 +928,10 @@ int32_t main(int argc, char *argv[])
 					UCHARDATA(output)[v]=255;
 				}
 
-				if((UCHARDATA(image)[pix]&CC_PT)!=0)
+				/*if((UCHARDATA(image)[pix]&CC_PT)!=0)
 				{
 					UCHARDATA(output)[cca_highest_value(image, pgm_map, i, j, k, CC_PT, rs, ps, output)]=255;
-				}
+				}*/
 
 
 
@@ -904,7 +943,7 @@ int32_t main(int argc, char *argv[])
 
 
 
-	writeimage(output, argv[2]);
+	writeimage(output, argv[3]);
 
 
 
