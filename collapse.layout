@@ -2,7 +2,7 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="Makefile" open="1" top="0" tabpos="1">
-		<Cursor position="4500" topLine="123" />
+		<Cursor position="4500" topLine="85" />
 	</File>
 	<File name="include/libcomplex.h" open="1" top="0" tabpos="2">
 		<Cursor position="7522" topLine="116" />
@@ -29,7 +29,7 @@
 		<Cursor position="382" topLine="0" />
 	</File>
 	<File name="include/liblist.h" open="1" top="0" tabpos="4">
-		<Cursor position="1898" topLine="35" />
+		<Cursor position="1898" topLine="28" />
 	</File>
 	<File name="include/libmin_sphere.h" open="0" top="0" tabpos="3">
 		<Cursor position="446" topLine="0" />
@@ -89,7 +89,7 @@
 		<Cursor position="548" topLine="0" />
 	</File>
 	<File name="src/com/cca_curvskel.cxx" open="1" top="0" tabpos="7">
-		<Cursor position="8176" topLine="227" />
+		<Cursor position="8565" topLine="355" />
 	</File>
 	<File name="src/com/cca_decompose_curve.cxx" open="0" top="0" tabpos="8">
 		<Cursor position="5199" topLine="181" />
@@ -175,8 +175,8 @@
 	<File name="src/com/cca_surfcollapse.cxx" open="0" top="0" tabpos="1">
 		<Cursor position="509" topLine="0" />
 	</File>
-	<File name="src/com/cca_surfskel.cxx" open="1" top="1" tabpos="6">
-		<Cursor position="7713" topLine="214" />
+	<File name="src/com/cca_surfskel.cxx" open="1" top="0" tabpos="6">
+		<Cursor position="6081" topLine="251" />
 	</File>
 	<File name="src/com/cca_vsacollapse_kf.cxx" open="0" top="0" tabpos="2">
 		<Cursor position="1216" topLine="10" />
@@ -226,11 +226,11 @@
 	<File name="src/com/pgm2iv.cxx" open="0" top="0" tabpos="10">
 		<Cursor position="4278" topLine="109" />
 	</File>
-	<File name="src/com/pgm_curvskel.cxx" open="0" top="0" tabpos="4">
-		<Cursor position="18900" topLine="733" />
+	<File name="src/com/pgm_curvskel.cxx" open="1" top="0" tabpos="8">
+		<Cursor position="20098" topLine="793" />
 	</File>
-	<File name="src/com/pgm_curvskelp.cxx" open="0" top="0" tabpos="3">
-		<Cursor position="12656" topLine="486" />
+	<File name="src/com/pgm_curvskelp.cxx" open="1" top="1" tabpos="9">
+		<Cursor position="12656" topLine="426" />
 	</File>
 	<File name="src/com/pgm_draw_containing_cube.cxx" open="0" top="0" tabpos="2">
 		<Cursor position="824" topLine="15" />

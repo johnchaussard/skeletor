@@ -1,4 +1,4 @@
-LIB_PINK=$(PINK)/../build/lib
+LIB_PINK=/home/mockba/Progs/pink_lib/
 
 #Quelques librairies externes
 INCLUDE_PINK=$(PINK)/include/
@@ -139,7 +139,7 @@ $(OBJ_PERSO_DIR)libcomplex_surfaces.o\
 CC=g++
 LC1=ar
 LC2=ranlib
-PINKFLAGS=-DMC_64_BITS -DUNIXIO -DPC -DHAVE_POSIX_IPC -DHAVE_SYSV_IPC -DHAVE_TIFF_LIB -DPINK_HAVE_SIMD -DUNIXIO -DPC
+PINKFLAGS=-DUNIXIO -DMC_64_BITS
 CCFLAGS=$(PINKFLAGS) -O3 -c -I $(INC_PERSO_DIR) -I $(INCLUDE_PINK)
 LDFLAGS=$(PINKFLAGS) -O3 -I $(INC_PERSO_DIR) -I $(INCLUDE_PINK)
 ADDLIBS=$(OBJ_FILES) -L$(LIB_PERSO_DIR) -L$(LIB_PINK) -lcomplex -lpink -lm

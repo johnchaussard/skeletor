@@ -794,10 +794,8 @@ int32_t main(int argc, char *argv[])
 					{
 						if(ULONGDATA(birth)[3*pix]==0)
 							ULONGDATA(birth)[3*pix]=l;
-
-
-
-						if(( (l-ULONGDATA(birth)[3*pix]) > (cca_getfacedist(image, filtermap, i, j, k, CC_AX, rs, ps))) )  //cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix]))
+						//Paramètre de filtrage ajustable, scal invariant...
+						if(l  > ((cca_getfacedist(image, filtermap, i, j, k, CC_AX, rs, ps) + 2*ULONGDATA(birth)[3*pix] - cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)) *1))  //cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix]))
 							if((UCHARDATA(inhib)[pix]&CC_AX)==0)
 							{
 								cca_add_complexface(inhib, CC_AX, pix, rs, ps);
@@ -811,7 +809,7 @@ int32_t main(int argc, char *argv[])
 
 
 
-						if(( (l-ULONGDATA(birth)[3*pix+1]) > (cca_getfacedist(image, filtermap, i, j, k, CC_AY, rs, ps))) ) // cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+1]))
+						if(l > ((cca_getfacedist(image, filtermap, i, j, k, CC_AY, rs, ps) + 2*ULONGDATA(birth)[3*pix+1] - cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)) *1)) // cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+1]))
 							if((UCHARDATA(inhib)[pix]&CC_AY)==0)
 							{
 								cca_add_complexface(inhib, CC_AY, pix, rs, ps);
@@ -825,7 +823,7 @@ int32_t main(int argc, char *argv[])
 
 
 
-						if(( (l-ULONGDATA(birth)[3*pix+2]) > (cca_getfacedist(image, filtermap, i, j, k, CC_AZ, rs, ps))) ) //cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+2]))
+						if(l  > ((cca_getfacedist(image, filtermap, i, j, k, CC_AZ, rs, ps) + 2*ULONGDATA(birth)[3*pix+2] - cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)) *1)) //cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+2]))
 							if((UCHARDATA(inhib)[pix]&CC_AZ)==0)
 							{
 								cca_add_complexface(inhib, CC_AZ, pix, rs, ps);
