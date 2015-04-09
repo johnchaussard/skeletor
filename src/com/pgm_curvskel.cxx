@@ -693,10 +693,13 @@ int32_t main(int argc, char *argv[])
 			return(-1);
 		}
 
+		
+
 		for(i=0; i<N; i++)
 			ULONGDATA(filtermap)[i]=(ULONGDATA(filtermap)[i]-ULONGDATA(distmap)[i]);
 
 		freeimage(distmap);
+		//distmap=NULL;
 	}
 
 
@@ -772,6 +775,8 @@ int32_t main(int argc, char *argv[])
 	l=0;
 	t1=NULL;
 
+	
+
 
 	while(cont==1)
 	{
@@ -795,7 +800,7 @@ int32_t main(int argc, char *argv[])
 						if(ULONGDATA(birth)[3*pix]==0)
 							ULONGDATA(birth)[3*pix]=l;
 						//Paramètre de filtrage ajustable, scal invariant...
-						if(l  > ((cca_getfacedist(image, filtermap, i, j, k, CC_AX, rs, ps) + 2*ULONGDATA(birth)[3*pix] - cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)) *1))  //cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix]))
+						if(l  > ((cca_getfacedist(image, filtermap, i, j, k, CC_AX, rs, ps) + 2*ULONGDATA(birth)[3*pix]) *1))  //cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix]))
 							if((UCHARDATA(inhib)[pix]&CC_AX)==0)
 							{
 								cca_add_complexface(inhib, CC_AX, pix, rs, ps);
@@ -809,7 +814,7 @@ int32_t main(int argc, char *argv[])
 
 
 
-						if(l > ((cca_getfacedist(image, filtermap, i, j, k, CC_AY, rs, ps) + 2*ULONGDATA(birth)[3*pix+1] - cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)) *1)) // cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+1]))
+						if(l > ((cca_getfacedist(image, filtermap, i, j, k, CC_AY, rs, ps) + 2*ULONGDATA(birth)[3*pix+1]) *1)) // cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+1]))
 							if((UCHARDATA(inhib)[pix]&CC_AY)==0)
 							{
 								cca_add_complexface(inhib, CC_AY, pix, rs, ps);
@@ -823,7 +828,7 @@ int32_t main(int argc, char *argv[])
 
 
 
-						if(l  > ((cca_getfacedist(image, filtermap, i, j, k, CC_AZ, rs, ps) + 2*ULONGDATA(birth)[3*pix+2] - cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)) *1)) //cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+2]))
+						if(l  > ((cca_getfacedist(image, filtermap, i, j, k, CC_AZ, rs, ps) + 2*ULONGDATA(birth)[3*pix+2]) *1)) //cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+2]))
 							if((UCHARDATA(inhib)[pix]&CC_AZ)==0)
 							{
 								cca_add_complexface(inhib, CC_AZ, pix, rs, ps);
@@ -843,7 +848,7 @@ int32_t main(int argc, char *argv[])
 
 	cca_keep_only_cells(image);
 
-	writeimage(image, "temp.cca");
+
 
 	/*maxvalue = pgm_cpt-1;
 

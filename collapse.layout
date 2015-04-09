@@ -229,7 +229,7 @@
 	<File name="src/com/pgm_curvskel.cxx" open="1" top="0" tabpos="8">
 		<Cursor position="20098" topLine="793" />
 	</File>
-	<File name="src/com/pgm_curvskelp.cxx" open="1" top="1" tabpos="9">
+	<File name="src/com/pgm_curvskelp.cxx" open="1" top="0" tabpos="9">
 		<Cursor position="12656" topLine="426" />
 	</File>
 	<File name="src/com/pgm_draw_containing_cube.cxx" open="0" top="0" tabpos="2">
@@ -244,8 +244,8 @@
 	<File name="src/com/pgm_make_coarser_decomposition.cxx" open="0" top="0" tabpos="9">
 		<Cursor position="1378" topLine="0" />
 	</File>
-	<File name="src/com/pgm_surfskel.cxx" open="0" top="0" tabpos="1">
-		<Cursor position="14014" topLine="536" />
+	<File name="src/com/pgm_surfskel.cxx" open="1" top="0" tabpos="10">
+		<Cursor position="15438" topLine="536" />
 	</File>
 	<File name="src/com/pgmlabel2iv.cxx" open="0" top="0" tabpos="11">
 		<Cursor position="5116" topLine="195" />
