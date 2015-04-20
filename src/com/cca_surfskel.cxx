@@ -22,6 +22,10 @@
 #define USAGE "<input_pgm> <output_cc> (<inhibit_cc>)"
 
 
+
+
+
+
 int32_t distance_dilat(struct xvimage *distmap_in)
 {
 	uint32_t N, rs, cs, ps, d, i, j, k, pix;
@@ -120,6 +124,8 @@ int32_t main(int argc, char *argv[])
 	face_desc fd, f;
 	cell *c;
 
+	fprintf(stdout, "Calcul Carte Distance\n");
+
 
 
 
@@ -175,6 +181,8 @@ int32_t main(int argc, char *argv[])
 	for (i = 0; i < N; i++) // inverse l'image
 		UCHARDATA(image)[i] = 255 - UCHARDATA(image)[i];
 
+	fprintf(stdout, "Calcul Carte Distance\n");
+
 	if (! ldist(image, 6, distmap))
 	{
 		fprintf(stderr, "Error: ldist failed.\n");
@@ -191,6 +199,8 @@ int32_t main(int argc, char *argv[])
 		freeimage(image);
 		return(-1);
 	}
+
+	fprintf(stdout, "Calcul Carte Ouverture\n");
 
 	if(distance_dilat(filtermap) != 0)
 	{
@@ -280,6 +290,8 @@ int32_t main(int argc, char *argv[])
 	//*******************************************************
 	//Perform collapse...
 	//*******************************************************
+
+	fprintf(stdout, "Calcul Squelette\n");
 
 	//We collapse
 	free_faces=NULL;

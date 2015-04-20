@@ -19,7 +19,7 @@
 #include <libcomplex.h>
 
 
-#define USAGE "<input_pgm> <output_cc> (<inhibit_cc>)"
+#define USAGE "<input_pgm> <inhibit_cc|NULL> <output_pgm> (<output_curvilinear_elements_pgm>)"
 
 
 uint32_t cca_highest_value(struct xvimage *cca_image, struct xvimage *distmap, uint32_t i, uint32_t j, uint32_t k, unsigned char face_type, uint32_t rs, uint32_t ps, struct xvimage* output)
@@ -244,7 +244,7 @@ int32_t distance_dilat(struct xvimage *distmap_in)
 
 	if(max%2 == 1)
 	{
-		memcpy(distmap_in->image_data, t1->image_data, N*sizeof(unsigned long));
+		memcpy(distmap_in->image_data, t1->image_data, N*4);
 		freeimage(t1);
 	}
 	else
@@ -257,8 +257,8 @@ int32_t distance_dilat(struct xvimage *distmap_in)
 
 int32_t main(int argc, char *argv[])
 {
-	struct xvimage *image, *filtermap_curv, *filtermap_surf, *t1, *inhib, *birth, *pgm_map, *output;;
-	uint32_t N, i, j, k, d, rs, cs, ps, pix, cont, l, pgm_cpt;
+	struct xvimage *image, *filtermap_curv, *filtermap_surf, *t1, *inhib, *birth, *pgm_map, *output, *output_curv;
+	uint32_t N, i, j, k, d, rs, cs, ps, pix, cont, l, pgm_cpt, t, N2;
 	list **free_faces;
 
 
@@ -267,7 +267,7 @@ int32_t main(int argc, char *argv[])
 	//*******************************************
 	//Checking input values
 	//*******************************************
-	if (argc!=3 && argc!=4)
+	if (argc!=4 && argc!=5)
 	{
 		fprintf(stderr, "usage: %s %s\n", argv[0], USAGE);
 		return(-1);
@@ -301,6 +301,10 @@ int32_t main(int argc, char *argv[])
 	pgm_cpt=1;
 
 	output=allocimage(NULL, rowsize(image), colsize(image), depth(image), VFF_TYP_1_BYTE);
+	if(argc==5)
+		output_curv=allocimage(NULL, rowsize(image), colsize(image), depth(image), VFF_TYP_1_BYTE);
+	else
+		output_curv=output;
 
 
 	//***********************************************
@@ -335,7 +339,7 @@ int32_t main(int argc, char *argv[])
 		return(-1);
 	}
 
-	if(distance_dilat(filtermap_curv) != 0)
+	if(distance_dilat(filtermap_surf) != 0)
 	{
 		fprintf(stderr, "Error: distance dilat failed.\n");
 		freeimage(filtermap_curv);
@@ -346,8 +350,7 @@ int32_t main(int argc, char *argv[])
 
 	for(i=0; i<N; i++)
 	{
-		ULONGDATA(filtermap_surf)[i]=ULONGDATA(filtermap_curv)[i]-ULONGDATA(filtermap_surf)[i];
-		ULONGDATA(filtermap_curv)[i]=ULONGDATA(filtermap_curv)[i]+ULONGDATA(filtermap_surf)[i];
+		ULONGDATA(filtermap_surf)[i]=ULONGDATA(filtermap_surf)[i]-ULONGDATA(filtermap_curv)[i];
 	}
 
 
@@ -390,7 +393,7 @@ int32_t main(int argc, char *argv[])
 	}
 
 
-	if(argc==3)
+	if(strcmp(argv[2], "NULL")==0)
 	{
 		inhib=allocimage(NULL, rowsize(image), colsize(image), depth(image), VFF_TYP_1_BYTE);
 		if(inhib==NULL)
@@ -404,7 +407,7 @@ int32_t main(int argc, char *argv[])
 	}
 	else
 	{
-		inhib=readimage(argv[3]);
+		inhib=readimage(argv[2]);
 		if(inhib==NULL)
 		{
 			fprintf(stderr, "Error: inhibit image could not be found.\n");
@@ -436,6 +439,8 @@ int32_t main(int argc, char *argv[])
 	t1=NULL;
 
 
+
+
 	while(cont==1)
 	{
 		cont=0;
@@ -461,7 +466,8 @@ int32_t main(int argc, char *argv[])
 						if(ULONGDATA(birth)[6*pix]==0)
 							ULONGDATA(birth)[6*pix]=l;
 
-						if(( (l-ULONGDATA(birth)[6*pix]) > (cca_getfacedist(image, filtermap_curv, i, j, k, CC_AX, rs, ps))) )  //cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix]))
+						//Paramètre de filtrage ajustable, scal invariant...
+						if(l > ((cca_getfacedist(image, filtermap_surf, i, j, k, CC_AX, rs, ps) + 2*ULONGDATA(birth)[6*pix]) *1))  //cca_getfacedist(image, distmap, i, j, k, CC_AX, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix]))
 							if((UCHARDATA(inhib)[pix]&CC_AX)==0)
 								cca_add_complexface(inhib, CC_AX, pix, rs, ps);
 					}
@@ -471,7 +477,7 @@ int32_t main(int argc, char *argv[])
 						if(ULONGDATA(birth)[6*pix+1]==0)
 							ULONGDATA(birth)[6*pix+1]=l;
 
-						if(( (l-ULONGDATA(birth)[6*pix+1]) > (cca_getfacedist(image, filtermap_curv, i, j, k, CC_AY, rs, ps))) ) // cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+1]))
+						if(l > ((cca_getfacedist(image, filtermap_surf, i, j, k, CC_AY, rs, ps) + 2*ULONGDATA(birth)[6*pix+1]) *1)) // cca_getfacedist(image, distmap, i, j, k, CC_AY, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+1]))
 							if((UCHARDATA(inhib)[pix]&CC_AY)==0)
 								cca_add_complexface(inhib, CC_AY, pix, rs, ps);
 					}
@@ -481,17 +487,18 @@ int32_t main(int argc, char *argv[])
 						if(ULONGDATA(birth)[6*pix+2]==0)
 							ULONGDATA(birth)[6*pix+2]=l;
 
-						if(( (l-ULONGDATA(birth)[6*pix+2]) > (cca_getfacedist(image, filtermap_curv, i, j, k, CC_AZ, rs, ps))) ) //cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+2]))
+						if(l > ((cca_getfacedist(image, filtermap_surf, i, j, k, CC_AZ, rs, ps) + 2*ULONGDATA(birth)[6*pix+2]) *1)) //cca_getfacedist(image, distmap, i, j, k, CC_AZ, rs, ps)+ noise  <= (l-ULONGDATA(birth)[3*pix+2]))
 							if((UCHARDATA(inhib)[pix]&CC_AZ)==0)
 								cca_add_complexface(inhib, CC_AZ, pix, rs, ps);
 					}
 
+					//Modif John : here, we can choose to add BIRTH to the values or not... It will remove more or less surfaces.
 					if(((UCHARDATA(image)[pix]&CC_FXY)!=0) && (k==0 || (k>0 && ((UCHARDATA(image)[pix-ps]&CC_VOL) == 0))) )
 					{
 						if(ULONGDATA(birth)[6*pix+3]==0)
 							ULONGDATA(birth)[6*pix+3]=l;
 
-						if(( (l-ULONGDATA(birth)[6*pix+3]) > cca_getfacedist(image, filtermap_surf, i, j, k, CC_FXY, rs, ps)) )
+						if(( (l-ULONGDATA(birth)[6*pix+3]) > cca_getfacedist(image, filtermap_surf, i, j, k, CC_FXY, rs, ps)+ULONGDATA(birth)[6*pix+3]) )
 							if((UCHARDATA(inhib)[pix]&CC_FXY)==0)
 								cca_add_complexface(inhib, CC_FXY, pix, rs, ps);
 					}
@@ -501,7 +508,7 @@ int32_t main(int argc, char *argv[])
 						if(ULONGDATA(birth)[6*pix+4]==0)
 							ULONGDATA(birth)[6*pix+4]=l;
 
-						if(( (l-ULONGDATA(birth)[6*pix+4]) > cca_getfacedist(image, filtermap_surf, i, j, k, CC_FXZ, rs, ps)) )
+						if(( (l-ULONGDATA(birth)[6*pix+4]) > cca_getfacedist(image, filtermap_surf, i, j, k, CC_FXZ, rs, ps)+ULONGDATA(birth)[6*pix+4]) )
 							if((UCHARDATA(inhib)[pix]&CC_FXZ)==0)
 								cca_add_complexface(inhib, CC_FXZ, pix, rs, ps);
 					}
@@ -511,7 +518,7 @@ int32_t main(int argc, char *argv[])
 						if(ULONGDATA(birth)[6*pix+5]==0)
 							ULONGDATA(birth)[6*pix+5]=l;
 
-						if(( (l-ULONGDATA(birth)[6*pix+5]) > cca_getfacedist(image, filtermap_surf, i, j, k, CC_FYZ, rs, ps)) )
+						if(( (l-ULONGDATA(birth)[6*pix+5]) > cca_getfacedist(image, filtermap_surf, i, j, k, CC_FYZ, rs, ps)+ULONGDATA(birth)[6*pix+5]) )
 							if((UCHARDATA(inhib)[pix]&CC_FYZ)==0)
 								cca_add_complexface(inhib, CC_FYZ, pix, rs, ps);
 					}
@@ -530,6 +537,8 @@ int32_t main(int argc, char *argv[])
 
 
 
+	cca_keep_only_cells(image);
+
 
 	pix=0;
 	for(k=0; k<d; k++)
@@ -538,17 +547,17 @@ int32_t main(int argc, char *argv[])
 			{
 				if((UCHARDATA(image)[pix]&CC_AX)!=0)
 				{
-					UCHARDATA(output)[cca_highest_value(image, pgm_map, i, j, k, CC_AX, rs, ps, output)]=255;
+					UCHARDATA(output_curv)[cca_highest_value(image, pgm_map, i, j, k, CC_AX, rs, ps, output_curv)]=255;
 				}
 
 				if((UCHARDATA(image)[pix]&CC_AY)!=0)
 				{
-					UCHARDATA(output)[cca_highest_value(image, pgm_map, i, j, k, CC_AY, rs, ps, output)]=255;
+					UCHARDATA(output_curv)[cca_highest_value(image, pgm_map, i, j, k, CC_AY, rs, ps, output_curv)]=255;
 				}
 
 				if((UCHARDATA(image)[pix]&CC_AZ)!=0)
 				{
-					UCHARDATA(output)[cca_highest_value(image, pgm_map, i, j, k, CC_AZ, rs, ps, output)]=255;
+					UCHARDATA(output_curv)[cca_highest_value(image, pgm_map, i, j, k, CC_AZ, rs, ps, output_curv)]=255;
 				}
 
 				if((UCHARDATA(image)[pix]&CC_FXY)!=0)
@@ -570,7 +579,9 @@ int32_t main(int argc, char *argv[])
 			}
 
 
-	writeimage(output, argv[2]);
+	writeimage(output, argv[3]);
+	if(argc==5)
+		writeimage(output_curv, argv[4]);
 
 	//****************************************************
 	//Program ends
@@ -581,6 +592,7 @@ int32_t main(int argc, char *argv[])
 	freeimage(filtermap_curv);
 	freeimage(filtermap_surf);
 	freeimage(t1);
+	freeimage(output);
 
 	for(i=0; i<24; i++)
 	{
